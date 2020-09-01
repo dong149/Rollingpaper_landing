@@ -1,5 +1,8 @@
 // @import "./font.scss";
-
+@font-face {
+  font-family: "garam";
+  src: url("/fonts/Garam.ttf");
+}
 @font-face {
   font-family: "black-han-sans";
   src: url("/fonts/blackhansans.ttf");

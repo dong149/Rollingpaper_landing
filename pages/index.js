@@ -80,14 +80,21 @@ const useStyles = makeStyles({
     width: "80%",
     filter: "drop-shadow(5px 5px 5px rgba(0,0,0,0.8))",
   },
+  mainTitle: {
+    textAlign: "center",
+    fontSize: "45px",
+    fontWeight: "bold",
+    width: "100%",
+    color: "#EEC667",
+  },
   mainText: {
     marginTop: "100px",
+    // fontFamily: "garam",
     fontSize: "36px",
     fontWeight: "bold",
     fontStretch: "normal",
-    color: "#EEC667",
+    color: "#FF7F4E",
     whiteSpace: "pre-wrap",
-    // textAlign: "center",
   },
   mainSubText: {
     fontSize: "18px",
@@ -171,7 +178,7 @@ const Index = (props) => {
         <Confetti
           width={bodyWidth}
           height={bodyHeight}
-          numberOfPieces={100}
+          numberOfPieces={50}
           colors={[
             "#f44336",
             "#e91e63",
@@ -191,7 +198,7 @@ const Index = (props) => {
             "#FF5722",
             "#795548",
           ]}
-          opacity={0.4}
+          opacity={0.2}
         />
         <Layouts min="100vh">
           <div className={classes.mainMobile}>
@@ -213,7 +220,7 @@ const Index = (props) => {
       </div>
       <div ref={layout2Ref}>
         <Layouts min="80vh">
-          <div className={classes.mainText}>
+          {/* <div className={classes.mainText}>
             <span>누구나</span>
             <br />
             <span>축하할 수 있도록</span>
@@ -245,9 +252,64 @@ const Index = (props) => {
             }}
           >
             자세히 보기
-          </a>
+          </a> */}
+          <div className={classes.mainText}>
+            <span>1.</span>
+            <br />
+            <span>롤링페이퍼를</span>
+            <br />
+            <span>생성해요!</span>
+          </div>
+          <div
+            style={{ width: "100%", textAlign: "center", marginTop: "20px" }}
+          >
+            <img src="/create.png" style={{ width: "50%" }} />
+          </div>
+          <div className={classes.mainSubText}>
+            <p>
+              받으실 분의 이름과 암호를 입력해주세요.(암호는 조회시 사용되며,
+              별다른 인증 없이 동명이인을 거르기 위함입니다.)
+            </p>
+          </div>
+          <div className={classes.mainText}>
+            <span>2.</span>
+            <br />
+            <span>함께 쓸 사람들과</span>
+            <br />
+            <span>공유해요!</span>
+          </div>
+          <div
+            style={{ width: "100%", textAlign: "center", marginTop: "20px" }}
+          >
+            <img src="/create.png" style={{ width: "50%" }} />
+          </div>
+          <div className={classes.mainSubText}>
+            <p>
+              받으실 분의 이름과 암호를 입력해주세요.(암호는 조회시 사용되며,
+              별다른 인증 없이 동명이인을 거르기 위함입니다.)
+            </p>
+          </div>
+          <div className={classes.mainText}>
+            <span>3.</span>
+            <br />
+            <span>함께 쓸 사람들과</span>
+            <br />
+            <span>공유해요!</span>
+          </div>
+          <div
+            style={{ width: "100%", textAlign: "center", marginTop: "20px" }}
+          >
+            <img src="/create.png" style={{ width: "50%" }} />
+          </div>
+          <div className={classes.mainSubText}>
+            <p>
+              받으실 분의 이름과 암호를 입력해주세요.(암호는 조회시 사용되며,
+              별다른 인증 없이 동명이인을 거르기 위함입니다.)
+            </p>
+          </div>
         </Layouts>
       </div>
+
       <div style={{ backgroundColor: "#2f3438" }}>
         <Layouts min="50vh">
           <div className={classes.dataText}>
@@ -308,62 +370,36 @@ const Index = (props) => {
           >
             *{year}년 {month + 1}월 {date}일기준
           </div>
+          <div
+            style={{
+              // position: "absolute",
+              // bottom: "50px",
+              color: "#fafafa",
+              width: "100%",
+              textAlign: "left",
+              marginTop: "150px",
+              marginBottom: "150px",
+            }}
+          >
+            <div>
+              <span style={{ fontFamily: "black-han-sans", fontSize: "35px" }}>
+                왼손잡이들
+              </span>
+              <br />
+              <span>사업자등록번호 : 156-28-00781</span>
+              <br />
+              <span>대표(CEO) : 류동훈 (Donghun Ryoo)</span>
+              <br />
+              <span>서울특별시 강남구 논현로87길 41, 신일유토빌 321호</span>
+              <br />
+              <span>Address : Nonhyun Ro 87 Gil, Seoul, Korea.</span>
+              <br />
+              <span>Email : leftecommerce@gmail.com</span>
+            </div>
+          </div>
         </Layouts>
       </div>
 
-      <div
-        style={{
-          backgroundColor: "#222222",
-          color: "white",
-          width: "100%",
-          paddingTop: "50px",
-          paddingBottom: "100px",
-          // minHeight: "50vh",
-          textAlign: "center",
-        }}
-      >
-        {/* <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              // flexDirection: "row",
-              width: "100%",
-              textAlign: "center",
-
-              alignItems: "center",
-            }}
-          >
-            <Profile imageSrc="" name="류동훈" />
-            <Profile imageSrc="" name="차서현" />
-            <Profile imageSrc="" name="이지현" />
-            <Profile imageSrc="" name="임지영" />
-            <Profile imageSrc="" name="박재성" />
-            <Profile imageSrc="" name="이인애" />
-            <Profile imageSrc="" name="한만종" />
-          </div> */}
-        <div
-          style={{
-            // position: "absolute",
-            // bottom: "50px",
-            width: "100%",
-            textAlign: "center",
-          }}
-        >
-          <span style={{ fontFamily: "black-han-sans", fontSize: "25px" }}>
-            왼손잡이들
-          </span>
-          <br />
-          <span>사업자등록번호 : 156-28-00781</span>
-          <br />
-          <span>대표(CEO) : 류동훈 (Donghun Ryoo)</span>
-          <br />
-          <span>서울특별시 강남구 논현로87길 41, 신일유토빌 321호</span>
-          <br />
-          <span>Address : Nonhyun Ro 87 Gil, Seoul, Korea.</span>
-          <br />
-          <span>Email : leftecommerce@gmail.com</span>
-        </div>
-      </div>
       <MobileView>
         {goingUp ? (
           <a
@@ -374,12 +410,12 @@ const Index = (props) => {
               right: "40px",
               bottom: "50px",
 
-              backgroundColor: "#FF7F4E",
+              backgroundColor: "#EEC667",
               textAlign: "center",
               color: "white",
               fontSize: "18px",
               fontWeight: "bold",
-              boxShadow: "0 4px 14px 0 rgba(255,127,78,0.8)",
+              boxShadow: "0 4px 14px 0 rgba(238,193,103,0.8)",
               height: "58px",
               lineHeight: "58px",
               transition: ".35s",
@@ -399,12 +435,12 @@ const Index = (props) => {
               left: 0,
               right: 0,
               bottom: 0,
-              backgroundColor: "#FF7F4E",
+              backgroundColor: "#EEC667",
               textAlign: "center",
               color: "white",
               fontSize: "18px",
               fontWeight: "bold",
-              boxShadow: "0 0 15px 0 rgba(0,0,0,.2)",
+              boxShadow: "0 0 15px 0 rgba(238,193,103,0.8)",
               height: "58px",
               lineHeight: "58px",
               transition: ".35s",
