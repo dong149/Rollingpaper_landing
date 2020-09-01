@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(4),
     display: "flex",
     flexDirection: "column",
-    minHeight: "100vh",
+    minHeight: (props) => props.min,
+    // minHeight: "100vh",
   },
 }));
 
