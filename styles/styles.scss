@@ -3,5 +3,46 @@
 @font-face {
   font-family: "black-han-sans";
   src: url("/fonts/blackhansans.ttf");
-  fontweight: regular;
+}
+@font-face {
+  font-family: "noto-sans-black";
+  src: url("/fonts/NotoSansKR-Black.otf");
+}
+@font-face {
+  font-family: "noto-sans";
+  src: url("/fonts/NotoSansKR-Bold.otf");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "noto-sans";
+  src: url("/fonts/NotoSansKR-Light.otf");
+  font-weight: lighter;
+}
+@font-face {
+  font-family: "noto-sans";
+  src: url("/fonts/NotoSansKR-Regular.otf");
+  font-weight: regular;
+}
+@font-face {
+  font-family: "noto-sans-thin";
+  src: url("/fonts/NotoSansKR-Thin.otf");
+}
+@font-face {
+  font-family: "apple-gothic";
+  src: url("/fonts/AppleSDGothicNeoB");
+  font-weight: "bold";
+}
+@font-face {
+  font-family: "apple-gothic";
+  src: url("/fonts/AppleSDGothicNeoM");
+  font-weight: "regular";
+}
+@font-face {
+  font-family: "apple-gothic";
+  src: url("/fonts/AppleSDGothicNeoL");
+  font-weight: "lighter";
+}
+
+* {
+  font-family: "noto-sans, apple-gothic";
 }

@@ -15,8 +15,10 @@ import Buttons from "../components/Buttons";
 import StickyFooter from "../components/StickyFooter";
 import VisibilitySensor from "react-visibility-sensor";
 import Confetti from "react-confetti";
+import CountUp from "react-countup";
 import "../styles/styles.scss";
 import Profile from "../components/Profile";
+import rollingService from "../services/rollingService";
 const useStyles = makeStyles({
   main: {
     width: "100%",
@@ -78,13 +80,55 @@ const useStyles = makeStyles({
     width: "80%",
     filter: "drop-shadow(5px 5px 5px rgba(0,0,0,0.8))",
   },
+  mainText: {
+    marginTop: "100px",
+    fontSize: "36px",
+    fontWeight: "bold",
+    fontStretch: "normal",
+    color: "#EEC667",
+    whiteSpace: "pre-wrap",
+    // textAlign: "center",
+  },
+  mainSubText: {
+    fontSize: "18px",
+    lineHeight: "32px",
+    color: "#212529",
+    marginTop: "20px",
+    marginBottom: "60px",
+  },
+  dataText: {
+    fontWeight: "bold",
+    fontSize: "28px",
+    color: "white",
+    letterSpacing: "-.72px",
+    lineHeight: "42px",
+    whiteSpace: "pre-wrap",
+  },
+  dataSubText: {
+    fontWeight: "regular",
+    marginBottom: "20px",
+    fontSize: "24px",
+    color: "white",
+    whiteSpace: "pre-wrap",
+  },
+  dataSubTextInfo: {
+    fontSize: "14px",
+    color: "#828c94",
+    letterSpacing: "-.32px",
+  },
 });
-const Index = () => {
+const Index = (props) => {
+  const { posts } = props;
   const classes = useStyles();
   const [buttonChange, setButtonChange] = useState(false);
   const prevScrollY = useRef(0);
+  const layoutRef = useRef();
+  const layout2Ref = useRef();
   const [goingUp, setGoingUp] = useState(false);
-
+  const [bodyWidth, setBodyWidth] = useState(0);
+  const [bodyHeight, setBodyHeight] = useState(0);
+  const rollingPaperContent = posts.rollingPaperContent + 500;
+  const rollingPaper = posts.rollingPaper + 50;
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
     if (prevScrollY.current < currentScrollY && goingUp) {
@@ -95,11 +139,20 @@ const Index = () => {
     }
     prevScrollY.current = currentScrollY;
   };
-
+  const today = new Date();
+  let year = today.getFullYear();
+  let month = today.getMonth();
+  let date = today.getDate();
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [goingUp]);
+  useEffect(() => {
+    setBodyWidth(layoutRef.scrollWidth);
+    setBodyHeight(
+      layoutRef.current.scrollHeight + layout2Ref.current.scrollHeight
+    );
+  }, []);
   return (
     <div>
       <Head>
@@ -114,7 +167,32 @@ const Index = () => {
           content="롤링페이퍼,선물,생일,여자친구,100일,친구"
         />
       </Head>
-      <div>
+      <div ref={layoutRef}>
+        <Confetti
+          width={bodyWidth}
+          height={bodyHeight}
+          numberOfPieces={100}
+          colors={[
+            "#f44336",
+            "#e91e63",
+            "#9c27b0",
+            "#673ab7",
+            "#3f51b5",
+            "#2196f3",
+            "#03a9f4",
+            "#00bcd4",
+            "#009688",
+            "#4CAF50",
+            "#8BC34A",
+            "#CDDC39",
+            "#FFEB3B",
+            "#FFC107",
+            "#FF9800",
+            "#FF5722",
+            "#795548",
+          ]}
+          opacity={0.4}
+        />
         <Layouts min="100vh">
           <div className={classes.mainMobile}>
             <div className={classes.mainLogoWrapMobile}>
@@ -133,39 +211,106 @@ const Index = () => {
           </div>
         </Layouts>
       </div>
-      <div style={{ backgroundColor: "#F6C453" }}>
+      <div ref={layout2Ref}>
+        <Layouts min="80vh">
+          <div className={classes.mainText}>
+            <span>누구나</span>
+            <br />
+            <span>축하할 수 있도록</span>
+          </div>
+          <div className={classes.mainSubText}>
+            <p>
+              롤링페이퍼는 기존에 존재하던 선물의 방식을 벗어나, 온라인을 활용한
+              동적이고 예쁜 새로운 방식으로 선물하는 방법을 고민합니다. 이를
+              통해 많은 사람들이 서로 축하를 주고받는 문화가 자리잡기를
+              꿈꿉니다.
+            </p>
+          </div>
+          <a
+            style={{
+              borderRadius: "6px",
+              width: "300px",
+              backgroundColor: "#EEC667",
+              margin: "0 auto",
+              textAlign: "center",
+              color: "white",
+              fontSize: "18px",
+              fontWeight: "bold",
+              boxShadow: "0 4px 14px 0 rgba(238,198,103,0.5)",
+              height: "58px",
+              lineHeight: "58px",
+              transition: ".35s",
+              zIndex: "10",
+              cursor: "pointer",
+            }}
+          >
+            자세히 보기
+          </a>
+        </Layouts>
+      </div>
+      <div style={{ backgroundColor: "#2f3438" }}>
         <Layouts min="50vh">
-          <div className={classes.mainMobile}>
-            <span
-              style={{
-                fontSize: "50px",
-                color: "white",
-                fontWeight: "bold",
-                marginBottom: "10px",
-              }}
-            >
-              5423명
+          <div className={classes.dataText}>
+            <p>
+              롤링페이퍼는
+              <br />
+              많은 사람들에게 행복을
+              <br />
+              전달해나가고 싶습니다.
+            </p>
+          </div>
+          <div className={classes.dataSubText}>
+            <span className={classes.dataSubTextInfo}>
+              현재까지 누적 사용자수
             </span>
-            <span style={{ fontSize: "20px", color: "black" }}>
-              누적 사용자 수
+            <br />
+            <span>
+              사용자 수{" "}
+              <span style={{ color: "#FF7F4E", fontWeight: "bold" }}>
+                <CountUp end={rollingPaperContent} redraw={true}>
+                  {({ countUpRef, start }) => (
+                    <VisibilitySensor onChange={start} delayedCall>
+                      <span ref={countUpRef} />
+                    </VisibilitySensor>
+                  )}
+                </CountUp>
+              </span>
             </span>
-            <span
-              style={{
-                fontSize: "50px",
-                color: "white",
-                fontWeight: "bold",
-                marginTop: "70px",
-                marginBottom: "10px",
-              }}
-            >
-              898명
+          </div>
+          <div className={classes.dataSubText} style={{ marginBottom: "0" }}>
+            <span className={classes.dataSubTextInfo}>
+              롤링페이퍼를 받은 사람 수
             </span>
-            <span style={{ fontSize: "20px", color: "black" }}>
-              지금까지 축하받은 사람
+            <br />
+            <span>
+              축하받은 수{" "}
+              <span style={{ color: "#FF7F4E", fontWeight: "bold" }}>
+                <CountUp end={rollingPaper} redraw={true}>
+                  {({ countUpRef, start }) => (
+                    <VisibilitySensor onChange={start} delayedCall>
+                      <span ref={countUpRef} />
+                    </VisibilitySensor>
+                  )}
+                </CountUp>
+              </span>
             </span>
+          </div>
+          <div
+            style={{
+              position: "relative",
+              marginBottom: "40px",
+              bottom: "0",
+              right: "0",
+              fontSize: "14px",
+              textAlign: "right",
+              color: "#656e75",
+            }}
+          >
+            *{year}년 {month + 1}월 {date}일기준
           </div>
         </Layouts>
       </div>
+
       <div
         style={{
           backgroundColor: "#222222",
@@ -219,54 +364,70 @@ const Index = () => {
           <span>Email : leftecommerce@gmail.com</span>
         </div>
       </div>
-      {goingUp ? (
-        <a
-          style={{
-            position: "fixed",
-            borderRadius: "6px",
-            left: "40px",
-            right: "40px",
-            bottom: "50px",
+      <MobileView>
+        {goingUp ? (
+          <a
+            style={{
+              position: "fixed",
+              borderRadius: "6px",
+              left: "40px",
+              right: "40px",
+              bottom: "50px",
 
-            backgroundColor: "#FF7F4E",
-            textAlign: "center",
-            color: "white",
-            fontSize: "18px",
-            fontWeight: "bold",
-            boxShadow: "0 0 15px 0 rgba(0,0,0,.2)",
-            height: "58px",
-            lineHeight: "58px",
-            transition: ".35s",
-            zIndex: "10",
-          }}
-        >
-          롤링페이퍼 시작하기
-        </a>
-      ) : (
-        <a
-          style={{
-            position: "fixed",
-            borderRadius: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "#FF7F4E",
-            textAlign: "center",
-            color: "white",
-            fontSize: "18px",
-            fontWeight: "bold",
-            boxShadow: "0 0 15px 0 rgba(0,0,0,.2)",
-            height: "58px",
-            lineHeight: "58px",
-            transition: ".35s",
-            zIndex: "10",
-          }}
-        >
-          롤링페이퍼 시작하기
-        </a>
-      )}
+              backgroundColor: "#FF7F4E",
+              textAlign: "center",
+              color: "white",
+              fontSize: "18px",
+              fontWeight: "bold",
+              boxShadow: "0 4px 14px 0 rgba(255,127,78,0.8)",
+              height: "58px",
+              lineHeight: "58px",
+              transition: ".35s",
+              zIndex: "10",
+              cursor: "pointer",
+              textDecoration: "none",
+            }}
+            href="https://rollingpaper.site"
+          >
+            롤링페이퍼 시작하기
+          </a>
+        ) : (
+          <a
+            style={{
+              position: "fixed",
+              borderRadius: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: "#FF7F4E",
+              textAlign: "center",
+              color: "white",
+              fontSize: "18px",
+              fontWeight: "bold",
+              boxShadow: "0 0 15px 0 rgba(0,0,0,.2)",
+              height: "58px",
+              lineHeight: "58px",
+              transition: ".35s",
+              zIndex: "10",
+              cursor: "pointer",
+              textDecoration: "none",
+            }}
+            href="https://rollingpaper.site"
+          >
+            롤링페이퍼 시작하기
+          </a>
+        )}
+      </MobileView>
     </div>
   );
 };
 
 export default Index;
+
+Index.getInitialProps = async () => {
+  const res = await rollingService.getRolling();
+
+  return {
+    posts: res.data,
+  };
+};
