@@ -19,6 +19,7 @@ import CountUp from "react-countup";
 import "../styles/styles.scss";
 import Profile from "../components/Profile";
 import rollingService from "../services/rollingService";
+import { motion } from "framer-motion";
 const useStyles = makeStyles({
   main: {
     width: "100%",
@@ -106,7 +107,7 @@ const useStyles = makeStyles({
   dataText: {
     fontWeight: "bold",
     fontSize: "28px",
-    color: "white",
+    // color: "white",
     letterSpacing: "-.72px",
     lineHeight: "42px",
     whiteSpace: "pre-wrap",
@@ -115,7 +116,7 @@ const useStyles = makeStyles({
     fontWeight: "regular",
     marginBottom: "20px",
     fontSize: "24px",
-    color: "white",
+    // color: "white",
     whiteSpace: "pre-wrap",
   },
   dataSubTextInfo: {
@@ -174,6 +175,7 @@ const Index = (props) => {
           content="롤링페이퍼,선물,생일,여자친구,100일,친구"
         />
       </Head>
+
       <div ref={layoutRef}>
         <Confetti
           width={bodyWidth}
@@ -213,112 +215,51 @@ const Index = (props) => {
               <span>이제는 롤링페이퍼로</span>
             </div>
           </div>
-          <div className={classes.mainImageWrapMobile}>
-            <img className={classes.mainImageMobile} src="/mockup_mobile.png" />
-          </div>
+          <VisibilitySensor>
+            {/* {({ isVisible }) => ( */}
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: {
+                  // transform: "translateY(-50px)",
+                  // scale: 0.8,
+                  y: 50,
+                  opacity: 0,
+                },
+                visible: {
+                  // transform: "translateY(0)",
+                  // scale: 1,
+                  y: 0,
+                  opacity: 1,
+                  transition: {
+                    // delay: 0,
+                    ease: "easeIn",
+                    duration: 1,
+                  },
+                },
+              }}
+            >
+              <div className={classes.mainImageWrapMobile}>
+                <img
+                  className={classes.mainImageMobile}
+                  src="/mockup_mobile.png"
+                />
+              </div>
+            </motion.div>
+            {/* )} */}
+          </VisibilitySensor>
         </Layouts>
       </div>
-      <div ref={layout2Ref}>
-        <Layouts min="80vh">
-          {/* <div className={classes.mainText}>
-            <span>누구나</span>
-            <br />
-            <span>축하할 수 있도록</span>
-          </div>
-          <div className={classes.mainSubText}>
-            <p>
-              롤링페이퍼는 기존에 존재하던 선물의 방식을 벗어나, 온라인을 활용한
-              동적이고 예쁜 새로운 방식으로 선물하는 방법을 고민합니다. 이를
-              통해 많은 사람들이 서로 축하를 주고받는 문화가 자리잡기를
-              꿈꿉니다.
-            </p>
-          </div>
-          <a
-            style={{
-              borderRadius: "6px",
-              width: "300px",
-              backgroundColor: "#EEC667",
-              margin: "0 auto",
-              textAlign: "center",
-              color: "white",
-              fontSize: "18px",
-              fontWeight: "bold",
-              boxShadow: "0 4px 14px 0 rgba(238,198,103,0.5)",
-              height: "58px",
-              lineHeight: "58px",
-              transition: ".35s",
-              zIndex: "10",
-              cursor: "pointer",
-            }}
-          >
-            자세히 보기
-          </a> */}
-          <div className={classes.mainText}>
-            <span>1.</span>
-            <br />
-            <span>롤링페이퍼를</span>
-            <br />
-            <span>생성해요!</span>
-          </div>
-          <div
-            style={{ width: "100%", textAlign: "center", marginTop: "20px" }}
-          >
-            <img src="/create.png" style={{ width: "50%" }} />
-          </div>
-          <div className={classes.mainSubText}>
-            <p>
-              받으실 분의 이름과 암호를 입력해주세요.(암호는 조회시 사용되며,
-              별다른 인증 없이 동명이인을 거르기 위함입니다.)
-            </p>
-          </div>
-          <div className={classes.mainText}>
-            <span>2.</span>
-            <br />
-            <span>함께 쓸 사람들과</span>
-            <br />
-            <span>공유해요!</span>
-          </div>
-          <div
-            style={{ width: "100%", textAlign: "center", marginTop: "20px" }}
-          >
-            <img src="/create.png" style={{ width: "50%" }} />
-          </div>
-          <div className={classes.mainSubText}>
-            <p>
-              받으실 분의 이름과 암호를 입력해주세요.(암호는 조회시 사용되며,
-              별다른 인증 없이 동명이인을 거르기 위함입니다.)
-            </p>
-          </div>
-          <div className={classes.mainText}>
-            <span>3.</span>
-            <br />
-            <span>함께 쓸 사람들과</span>
-            <br />
-            <span>공유해요!</span>
-          </div>
-          <div
-            style={{ width: "100%", textAlign: "center", marginTop: "20px" }}
-          >
-            <img src="/create.png" style={{ width: "50%" }} />
-          </div>
-          <div className={classes.mainSubText}>
-            <p>
-              받으실 분의 이름과 암호를 입력해주세요.(암호는 조회시 사용되며,
-              별다른 인증 없이 동명이인을 거르기 위함입니다.)
-            </p>
-          </div>
-        </Layouts>
-      </div>
-
-      <div style={{ backgroundColor: "#2f3438" }}>
+      <div style={{ backgroundColor: "#FAFAFA" }}>
         <Layouts min="50vh">
           <div className={classes.dataText}>
             <p>
-              롤링페이퍼는
+              롤링페이퍼로
               <br />
-              많은 사람들에게 행복을
+              사랑하는 사람들과
               <br />
-              전달해나가고 싶습니다.
+              소중한 마음을 공유하세요!
             </p>
           </div>
           <div className={classes.dataSubText}>
@@ -370,32 +311,246 @@ const Index = (props) => {
           >
             *{year}년 {month + 1}월 {date}일기준
           </div>
+        </Layouts>
+      </div>
+      <div ref={layout2Ref} style={{ marginBottom: "70px" }}>
+        <Layouts min="80vh">
+          <div className={classes.mainText}>
+            <span>1.</span>
+            <br />
+            <span>롤링페이퍼를</span>
+            <br />
+            <span>생성해요!</span>
+          </div>
+          <div
+            style={{ width: "100%", textAlign: "center", marginTop: "20px" }}
+          >
+            <VisibilitySensor>
+              {({ isVisible }) => (
+                <motion.div
+                  initial="hidden"
+                  animate={`${isVisible && "visible"}`}
+                  variants={{
+                    hidden: {
+                      y: 50,
+                      opacity: 0,
+                    },
+                    visible: {
+                      y: 0,
+                      opacity: 1,
+                      transition: {
+                        ease: "easeIn",
+                        duration: 1,
+                      },
+                    },
+                  }}
+                >
+                  <img src="/create.png" style={{ width: "50%" }} />
+                  <img src="/create-name.png" style={{ width: "50%" }} />
+                </motion.div>
+              )}
+            </VisibilitySensor>
+          </div>
+          {/* <div className={classes.mainSubText}>
+            <p>
+              받으실 분의 이름과 암호를 입력해주세요.(암호는 조회시 사용되며,
+              별다른 인증 없이 동명이인을 거르기 위함입니다.)
+            </p>
+          </div> */}
+          <div className={classes.mainText}>
+            <span>2.</span>
+            <br />
+            <span>함께 쓸 사람들과</span>
+            <br />
+            <span>공유해요!</span>
+          </div>
+          <div
+            style={{ width: "100%", textAlign: "center", marginTop: "20px" }}
+          >
+            <VisibilitySensor>
+              {({ isVisible }) => (
+                <motion.div
+                  initial="hidden"
+                  animate={`${isVisible && "visible"}`}
+                  variants={{
+                    hidden: {
+                      // y: 50,
+                      opacity: 0,
+                    },
+                    visible: {
+                      y: 0,
+                      opacity: 1,
+                      transition: {
+                        ease: "easeIn",
+                        duration: 0.5,
+                      },
+                    },
+                  }}
+                >
+                  <img src="/main-empty.png" style={{ width: "50%" }} />
+                  <img src="/share.png" style={{ width: "50%" }} />
+                  <img src="/kakao.png" style={{ width: "50%" }} />
+                  <img src="/share-kakao-sender.png" style={{ width: "50%" }} />
+                </motion.div>
+              )}
+            </VisibilitySensor>
+          </div>
+          {/* <div className={classes.mainSubText}>
+            <p>
+              공유하기 버튼을 눌러주시고, 함께 준비하는 사람들에게 공유버튼을
+              눌러 함께 쓸 사람들과 공유하세요!
+            </p>
+          </div> */}
+          <div
+            style={{ width: "100%", textAlign: "center", marginTop: "20px" }}
+          ></div>
+          {/* <div className={classes.mainSubText}>
+            <p>카카오톡과 연동되어, 쉽게 공유할 수 있습니다.</p>
+          </div> */}
+          <div className={classes.mainText}>
+            <span>3.</span>
+            <br />
+            <span>여러 기능으로</span>
+            <br />
+            <span>예쁘게 작성해요!</span>
+          </div>
+          <div
+            style={{ width: "100%", textAlign: "center", marginTop: "20px" }}
+          >
+            <VisibilitySensor>
+              {({ isVisible }) => (
+                <motion.div
+                  initial="hidden"
+                  animate={`${isVisible && "visible"}`}
+                  variants={{
+                    hidden: {
+                      // y: 50,
+                      opacity: 0,
+                    },
+                    visible: {
+                      y: 0,
+                      opacity: 1,
+                      transition: {
+                        ease: "easeIn",
+                        duration: 0.5,
+                      },
+                    },
+                  }}
+                >
+                  <img src="/editor-color.png" style={{ width: "50%" }} />
+                  <img src="/editor-font.png" style={{ width: "50%" }} />
+                  <img src="/editor-photo.png" style={{ width: "50%" }} />
+                  <img src="/editor-wrote.png" style={{ width: "50%" }} />
+                </motion.div>
+              )}
+            </VisibilitySensor>
+          </div>
+          {/* <div className={classes.mainSubText}>
+            <p>
+              받으실 분의 이름과 암호를 입력해주세요.(암호는 조회시 사용되며,
+              별다른 인증 없이 동명이인을 거르기 위함입니다.)
+            </p>
+          </div> */}
+          <div className={classes.mainText}>
+            <span>4.</span>
+            <br />
+            <span>주인공에게</span>
+            <br />
+            <span>보내주세요!</span>
+          </div>
+          <div
+            style={{ width: "100%", textAlign: "center", marginTop: "20px" }}
+          >
+            <VisibilitySensor>
+              {({ isVisible }) => (
+                <motion.div
+                  initial="hidden"
+                  animate={`${isVisible && "visible"}`}
+                  variants={{
+                    hidden: {
+                      // y: 50,
+                      opacity: 0,
+                    },
+                    visible: {
+                      y: 0,
+                      opacity: 1,
+                      transition: {
+                        // ease: "easeIn",
+                        duration: 0.5,
+                      },
+                    },
+                  }}
+                >
+                  <img src="/share.png" style={{ width: "50%" }} />
+                  <img
+                    src="/share-kakao-receiver.png"
+                    style={{ width: "50%" }}
+                  />
+                  <img src="/receiver.png" style={{ width: "50%" }} />
+                  <img src="/detail.png" style={{ width: "50%" }} />
+                </motion.div>
+              )}
+            </VisibilitySensor>
+          </div>
+        </Layouts>
+      </div>
+
+      <div style={{ backgroundColor: "#fafafa" }}>
+        <Layouts>
           <div
             style={{
               // position: "absolute",
               // bottom: "50px",
-              color: "#fafafa",
+
+              color: "",
               width: "100%",
-              textAlign: "left",
+              textAlign: "center",
               marginTop: "150px",
               marginBottom: "150px",
             }}
           >
-            <div>
-              <span style={{ fontFamily: "black-han-sans", fontSize: "35px" }}>
-                왼손잡이들
-              </span>
-              <br />
-              <span>사업자등록번호 : 156-28-00781</span>
-              <br />
-              <span>대표(CEO) : 류동훈 (Donghun Ryoo)</span>
-              <br />
-              <span>서울특별시 강남구 논현로87길 41, 신일유토빌 321호</span>
-              <br />
-              <span>Address : Nonhyun Ro 87 Gil, Seoul, Korea.</span>
-              <br />
-              <span>Email : leftecommerce@gmail.com</span>
-            </div>
+            <VisibilitySensor>
+              {({ isVisible }) => (
+                <motion.div
+                  initial="hidden"
+                  animate={`${isVisible && "visible"}`}
+                  variants={{
+                    hidden: {
+                      // y: 50,
+                      opacity: 0,
+                    },
+                    visible: {
+                      y: 0,
+                      opacity: 1,
+                      transition: {
+                        // ease: "easeIn",
+                        duration: 2,
+                      },
+                    },
+                  }}
+                >
+                  <div>
+                    <span
+                      style={{ fontFamily: "black-han-sans", fontSize: "35px" }}
+                    >
+                      왼손잡이들
+                    </span>
+                    <br />
+                    <span>사업자등록번호 : 156-28-00781</span>
+                    <br />
+                    <span>대표(CEO) : 류동훈 (Donghun Ryoo)</span>
+                    <br />
+                    <span>
+                      서울특별시 강남구 논현로87길 41, 신일유토빌 321호
+                    </span>
+                    <br />
+                    <span>Address : Nonhyun Ro 87 Gil, Seoul, Korea.</span>
+                    <br />
+                    <span>Email : leftecommerce@gmail.com</span>
+                  </div>
+                </motion.div>
+              )}
+            </VisibilitySensor>
           </div>
         </Layouts>
       </div>
