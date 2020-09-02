@@ -169,10 +169,10 @@ const Index = (props) => {
           name="viewport"
           content="width=device-width, initial-scale=1 ,user-scalable=no, maximum-scale=1"
         />
-        <meta name="description" content="롤링 페이퍼 쉽게 만들기" />
+        <meta name="description" content="온라인 롤링 페이퍼 서비스" />
         <meta
           name="keywords"
-          content="롤링페이퍼,선물,생일,여자친구,100일,친구"
+          content="온라인,롤링페이퍼,선물,생일,여자친구,100일,친구,서비스"
         />
       </Head>
 
@@ -492,6 +492,31 @@ const Index = (props) => {
               )}
             </VisibilitySensor>
           </div>
+          <BrowserView>
+            <div
+              style={{
+                width: "100%",
+                borderRadius: "6px",
+                backgroundColor: "#FF7F4E",
+                textAlign: "center",
+                color: "white",
+                fontSize: "18px",
+                fontWeight: "bold",
+                boxShadow: "0 4px 14px 0 rgba(255,127,78,0.8)",
+                height: "58px",
+                lineHeight: "58px",
+                transition: ".35s",
+                cursor: "pointer",
+                textDecoration: "none",
+                marginTop: "50px",
+              }}
+              onClick={() => {
+                location.href = "https://rollingpaper.site";
+              }}
+            >
+              롤링페이퍼 시작하기
+            </div>
+          </BrowserView>
         </Layouts>
       </div>
 
